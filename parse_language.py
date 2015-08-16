@@ -9,6 +9,7 @@ def get_files(folder):
     files = [f for f in listdir(folder) if isfile(join(folder, f))]
     return files
 
+
 def get_tags(input):
     doc = etree.parse(input)
     tags = doc.findall('*')
@@ -17,8 +18,10 @@ def get_tags(input):
 
 def sanitize(text):
     if text is not None:
-        return text.strip(' \t\n\r')
+        return text.replace(',', '').strip(' \t\n\r')
     return ''
+
+
 def parse_xml(target, source, output):
     target_tags = get_tags(target)
     source_tags = get_tags(source)
@@ -49,9 +52,9 @@ def remove_file(filename):
 
 
 def main():
-    output = 'output/2.csv'
+    output = 'output/1.csv'
     remove_file(output)
-    parse_folder('ja/', 'eu/', output)
+    parse_folder('ja/', 'am/', output)
     
 
 if __name__ == '__main__':
